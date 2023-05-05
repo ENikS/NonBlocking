@@ -71,12 +71,11 @@ namespace NonBlocking
         {
             var h = (uint)fullHash;
 
-            // xor-shift some upper bits down, in case if variations are mostly in high bits
-            // and scatter the bits a little to break up clusters if hashes are periodic (like 42, 43, 44, ...)
-            // long clusters can cause long reprobes. small clusters are ok though.
+            h ^= h >> 16;
+            h *= 0x7feb352dU;
             h ^= h >> 15;
-            h ^= h >> 8;
-            h += (h >> 3) * 2654435769u;
+            h *= 0x846ca68bU;
+            h ^= h >> 16;
 
             return (int)h & lenMask;
         }
