@@ -4,11 +4,11 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal sealed class DictionaryImplRef<TKey, TKeyStore, TValue>
             : DictionaryImpl<TKey, TKey, TValue>
@@ -45,12 +45,12 @@ namespace NonBlocking
                 if (entryKeyValue == null)
                 {
                     // claimed a new slot
-                    this.allocatedSlotCount.Increment();
+                    allocatedSlotCount.Increment();
                     return true;
                 }
             }
 
-            return (object)key == entryKeyValue || 
+            return (object)key == entryKeyValue ||
                 _keyComparer.Equals(key, Unsafe.As<object, TKey>(ref entryKeyValue));
         }
 

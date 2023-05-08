@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\NonBlocking\NonBlocking.csproj" />
+    <!--<ProjectReference Include="..\src\NonBlocking\NonBlocking.csproj" />-->
+    <PackageReference Include="NonBlocking" Version="2.1.1" />
   </ItemGroup>
 
 </Project>

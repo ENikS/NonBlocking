@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal abstract class DictionaryImpl<TKey, TValue>
         : DictionaryImpl
@@ -51,7 +51,7 @@ namespace NonBlocking
             {
                 get
                 {
-                    return new KeyValuePair<TKey, TValue>(this._curKey, _curValue);
+                    return new KeyValuePair<TKey, TValue>(_curKey, _curValue);
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace NonBlocking
             // null
             if (obj == NULLVALUE)
             {
-                return default(TValue);
+                return default;
             }
 
             // ref type

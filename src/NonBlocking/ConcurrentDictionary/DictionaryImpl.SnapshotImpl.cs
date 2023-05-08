@@ -4,9 +4,8 @@
 
 #nullable disable
 
-using System.Runtime.CompilerServices;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal abstract partial class DictionaryImpl<TKey, TKeyStore, TValue>
         : DictionaryImpl<TKey, TValue>

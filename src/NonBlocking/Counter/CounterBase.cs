@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace NonBlocking
+namespace Experimental
 {
     /// <summary>
     /// Scalable counter base.

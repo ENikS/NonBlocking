@@ -12,9 +12,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using static NonBlocking.DictionaryImpl;
+using static Experimental.DictionaryImpl;
 
-namespace NonBlocking
+namespace Experimental
 {
     /// <summary>
     /// Represents a thread-safe and lock-free collection of keys and values.
@@ -81,7 +81,7 @@ namespace NonBlocking
         /// <see cref="IEqualityComparer{TKey}"/>.
         /// </summary>
         /// <param name="comparer">The <see cref="IEqualityComparer{TKey}"/> implementation to use when comparing keys.</param>
-        public ConcurrentDictionary(IEqualityComparer<TKey>? comparer) : this(DefaultConcurrencyLevel, DefaultCapacity, comparer) { }
+        public ConcurrentDictionary(IEqualityComparer<TKey> comparer) : this(DefaultConcurrencyLevel, DefaultCapacity, comparer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentDictionary{TKey,TValue}"/>
@@ -91,7 +91,7 @@ namespace NonBlocking
         /// <param name="collection">The <see cref="IEnumerable{T}"/> whose elements are copied to the new <see cref="ConcurrentDictionary{TKey,TValue}"/>.</param>
         /// <param name="comparer">The <see cref="IEqualityComparer{TKey}"/> implementation to use when comparing keys.</param>
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
-        public ConcurrentDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey>? comparer)
+        public ConcurrentDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer)
             : this(comparer)
         {
             if (collection is null)
@@ -117,7 +117,7 @@ namespace NonBlocking
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> is less than 1.</exception>
         /// <exception cref="ArgumentException"><paramref name="collection"/> contains one or more duplicate keys.</exception>
-        public ConcurrentDictionary(int concurrencyLevel, IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey>? comparer)
+        public ConcurrentDictionary(int concurrencyLevel, IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey> comparer)
             : this(concurrencyLevel, DefaultCapacity, comparer)
         {
             if (collection is null)
@@ -137,7 +137,7 @@ namespace NonBlocking
                     ThrowHelper.ThrowKeyNullException();
                 }
 
-                if (!this.TryAdd(pair.Key, pair.Value))
+                if (!TryAdd(pair.Key, pair.Value))
                 {
                     throw new ArgumentException("duplicate keys");
                 }
@@ -153,7 +153,7 @@ namespace NonBlocking
         /// <param name="capacity">The initial number of elements that the <see cref="ConcurrentDictionary{TKey,TValue}"/> can contain.</param>
         /// <param name="comparer">The <see cref="IEqualityComparer{TKey}"/> implementation to use when comparing keys.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> is less than 1. -or- <paramref name="capacity"/> is less than 0.</exception>
-        public ConcurrentDictionary(int concurrencyLevel, int capacity, IEqualityComparer<TKey>? comparer)
+        public ConcurrentDictionary(int concurrencyLevel, int capacity, IEqualityComparer<TKey> comparer)
         {
             if (concurrencyLevel < 1)
             {
@@ -175,7 +175,7 @@ namespace NonBlocking
             }
             else
             {
-                if (typeof(TKey) == typeof(int) || (typeof(TKey) == typeof(uint) && comparer == null))
+                if (typeof(TKey) == typeof(int) || typeof(TKey) == typeof(uint) && comparer == null)
                 {
                     if (comparer == null)
                     {
@@ -189,7 +189,7 @@ namespace NonBlocking
                     return;
                 }
 
-                if (typeof(TKey) == typeof(long) || (typeof(TKey) == typeof(ulong) && comparer == null))
+                if (typeof(TKey) == typeof(long) || typeof(TKey) == typeof(ulong) && comparer == null)
                 {
                     if (comparer == null)
                     {
@@ -203,7 +203,7 @@ namespace NonBlocking
                     return;
                 }
 
-                if (typeof(TKey) == typeof(nint) || (typeof(TKey) == typeof(nuint) && comparer == null))
+                if (typeof(TKey) == typeof(nint) || typeof(TKey) == typeof(nuint) && comparer == null)
                 {
                     if (comparer == null)
                     {
@@ -327,7 +327,7 @@ namespace NonBlocking
             // null
             if (obj == NULLVALUE)
             {
-                return default(TValue);
+                return default;
             }
 
             // ref type
@@ -373,7 +373,7 @@ namespace NonBlocking
             }
             else
             {
-                value = default(TValue);
+                value = default;
                 return false;
             }
         }
@@ -804,10 +804,10 @@ namespace NonBlocking
             while (true)
             {
                 TValue tValue;
-                if (this.TryGetValue(key, out tValue))
+                if (TryGetValue(key, out tValue))
                 {
                     tValue2 = updateValueFactory(key, tValue, factoryArgument);
-                    if (this.TryUpdate(key, tValue2, tValue))
+                    if (TryUpdate(key, tValue2, tValue))
                     {
                         return tValue2;
                     }
@@ -815,7 +815,7 @@ namespace NonBlocking
                 else
                 {
                     tValue2 = addValueFactory(key, factoryArgument);
-                    if (this.TryAdd(key, tValue2))
+                    if (TryAdd(key, tValue2))
                     {
                         return tValue2;
                     }
@@ -863,10 +863,10 @@ namespace NonBlocking
             while (true)
             {
                 TValue tValue;
-                if (this.TryGetValue(key, out tValue))
+                if (TryGetValue(key, out tValue))
                 {
                     tValue2 = updateValueFactory(key, tValue);
-                    if (this.TryUpdate(key, tValue2, tValue))
+                    if (TryUpdate(key, tValue2, tValue))
                     {
                         break;
                     }
@@ -874,7 +874,7 @@ namespace NonBlocking
                 else
                 {
                     tValue2 = addValueFactory(key);
-                    if (this.TryAdd(key, tValue2))
+                    if (TryAdd(key, tValue2))
                     {
                         break;
                     }
@@ -916,22 +916,22 @@ namespace NonBlocking
             while (true)
             {
                 TValue tValue;
-                if (this.TryGetValue(key, out tValue))
+                if (TryGetValue(key, out tValue))
                 {
                     tValue2 = updateValueFactory(key, tValue);
-                    if (this.TryUpdate(key, tValue2, tValue))
+                    if (TryUpdate(key, tValue2, tValue))
                     {
                         return tValue2;
                     }
                 }
-                else if (this.TryAdd(key, addValue))
+                else if (TryAdd(key, addValue))
                 {
                     return addValue;
                 }
             }
         }
 
-         /// <summary>
+        /// <summary>
         /// Gets a value that indicates whether the <see cref="ConcurrentDictionary{TKey,TValue}"/> is empty.
         /// </summary>
         /// <value>true if the <see cref="ConcurrentDictionary{TKey,TValue}"/> is empty; otherwise,
@@ -1078,7 +1078,7 @@ namespace NonBlocking
         /// of the dictionary.  The contents exposed through the enumerator may contain modifications
         /// made to the dictionary after <see cref="GetEnumerator"/> was called.
         /// </remarks>
-        IEnumerator IEnumerable.GetEnumerator() => ((ConcurrentDictionary<TKey, TValue>)this).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
 
@@ -1101,7 +1101,7 @@ namespace NonBlocking
         /// -or- A value with the same key already exists in the <see
         /// cref="Dictionary{TKey,TValue}"/>.
         /// </exception>
-        void IDictionary.Add(object key, object? value)
+        void IDictionary.Add(object key, object value)
         {
             if (key is null)
             {
@@ -1142,7 +1142,7 @@ namespace NonBlocking
         /// <see cref="IDictionary"/>.</summary>
         /// <returns>An <see cref="IDictionaryEnumerator"/> for the <see
         /// cref="IDictionary"/>.</returns>
-        IDictionaryEnumerator IDictionary.GetEnumerator()=> new SnapshotIDictionaryEnumerator(_table.GetSnapshot());
+        IDictionaryEnumerator IDictionary.GetEnumerator() => new SnapshotIDictionaryEnumerator(_table.GetSnapshot());
 
         /// <summary>
         /// Gets a value indicating whether the <see
@@ -1218,7 +1218,7 @@ namespace NonBlocking
         /// <typeparamref name="TValue"/> of the <see
         /// cref="ConcurrentDictionary{TKey,TValue}"/>
         /// </exception>
-        object? IDictionary.this[object key]
+        object IDictionary.this[object key]
         {
             get
             {
@@ -1248,12 +1248,12 @@ namespace NonBlocking
 
                 ThrowIfInvalidObjectValue(value);
 
-                ((ConcurrentDictionary<TKey, TValue>)this)[(TKey)key] = (TValue)value!;
+                this[(TKey)key] = (TValue)value!;
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void ThrowIfInvalidObjectValue(object? value)
+        private static void ThrowIfInvalidObjectValue(object value)
         {
             if (value != null)
             {

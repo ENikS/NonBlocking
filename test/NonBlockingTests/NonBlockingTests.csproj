@@ -16,8 +16,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NonBlocking\NonBlocking.csproj" />
+    <ProjectReference Include="..\..\src\NonBlocking\NonBlockingExperimental.csproj" />
   </ItemGroup>
 </Project>

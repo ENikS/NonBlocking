@@ -51,7 +51,7 @@ namespace ENiks
         [Fact()]
         public static void AddTwo()
         {
-            var dict = new NonBlocking.ConcurrentDictionary<S1, string>(new S1.Comparer());
+            var dict = new Experimental.ConcurrentDictionary<S1, string>(new S1.Comparer());
 
             var s1 = new S1(1, 1.ToString());
             var s2 = new S1(1, 2.ToString());
@@ -71,7 +71,7 @@ namespace ENiks
         [Fact()]
         public static void AddTwoHundred()
         {
-            var dict = new NonBlocking.ConcurrentDictionary<S1, string>(new S1.Comparer());
+            var dict = new Experimental.ConcurrentDictionary<S1, string>(new S1.Comparer());
 
             for (int i = int.MaxValue; i > int.MaxValue - 1000; i--)
             { 

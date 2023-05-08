@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal abstract partial class DictionaryImpl<TKey, TKeyStore, TValue>
         : DictionaryImpl<TKey, TValue>

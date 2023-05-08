@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal sealed class DictionaryImplBoxed<TKey, TValue>
             : DictionaryImpl<TKey, Boxed<TKey>, TValue>
@@ -32,7 +32,7 @@ namespace NonBlocking
                 if (entryKeyValue == null)
                 {
                     // claimed a new slot
-                    this.allocatedSlotCount.Increment();
+                    allocatedSlotCount.Increment();
                     return true;
                 }
             }
@@ -49,7 +49,7 @@ namespace NonBlocking
                 if (entryKeyValue == null)
                 {
                     // claimed a new slot
-                    this.allocatedSlotCount.Increment();
+                    allocatedSlotCount.Increment();
                     return true;
                 }
             }
@@ -90,12 +90,12 @@ namespace NonBlocking
 
         public Boxed(T key)
         {
-            this.Value = key;
+            Value = key;
         }
 
         public override bool Equals(object obj)
         {
-            return EqualityComparer<T>.Default.Equals(this.Value, Unsafe.As<Boxed<T>>(obj).Value);
+            return EqualityComparer<T>.Default.Equals(Value, Unsafe.As<Boxed<T>>(obj).Value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -133,7 +133,7 @@ namespace NonBlocking
         internal void Freeze()
         {
             // Wait for writers (1) to leave. Already 2 is ok, or set 0 -> 2.
-            while (Interlocked.CompareExchange(ref writeStatus, 2, 0) == 1);
+            while (Interlocked.CompareExchange(ref writeStatus, 2, 0) == 1) ;
         }
     }
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()

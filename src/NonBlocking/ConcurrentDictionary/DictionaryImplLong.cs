@@ -4,7 +4,7 @@
 
 using System.Threading;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal sealed class DictionaryImplLong<TValue>
                 : DictionaryImpl<long, long, TValue>
@@ -39,7 +39,7 @@ namespace NonBlocking
                 if (entryKeyValue == 0)
                 {
                     // claimed a new slot
-                    this.allocatedSlotCount.Increment();
+                    allocatedSlotCount.Increment();
                     return true;
                 }
             }
@@ -106,7 +106,7 @@ namespace NonBlocking
                 if (entryKeyValue == 0)
                 {
                     // claimed a new slot
-                    this.allocatedSlotCount.Increment();
+                    allocatedSlotCount.Increment();
                     return true;
                 }
             }
@@ -122,7 +122,7 @@ namespace NonBlocking
 
         protected override int hash(long key)
         {
-            return (key == 0) ?
+            return key == 0 ?
                 ZEROHASH :
                 key.GetHashCode() | SPECIAL_HASH_BITS;
         }

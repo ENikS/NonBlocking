@@ -6,7 +6,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace NonBlocking
+namespace Experimental
 {
     internal abstract class DictionaryImpl
     {
