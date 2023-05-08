@@ -13,12 +13,14 @@ namespace Benchmarks
     {
         IDictionary<int, int> NonBlocking;
         IDictionary<int, int> Concurrent;
+        IDictionary<int, int> Experimental;
 
         [IterationSetup]
         public void Setup()
         {
             NonBlocking = new NonBlocking.ConcurrentDictionary<int, int>();
             Concurrent = new System.Collections.Concurrent.ConcurrentDictionary<int, int>();
+            Experimental = new Experimental.ConcurrentDictionary<int, int>();
         }
 
         [Params(10, 10_000, 100_000, 1_000_000)]
@@ -34,6 +36,12 @@ namespace Benchmarks
         public void Add_NonBlocking()
         {
             Parallel.For(0, N, (i) => NonBlocking.Add(i, i));
+        }
+
+        [Benchmark]
+        public void Add_Experimental()
+        {
+            Parallel.For(0, N, (i) => Experimental.Add(i, i));
         }
     }
 }

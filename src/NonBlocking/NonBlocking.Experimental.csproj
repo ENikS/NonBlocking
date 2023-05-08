@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
 
-    <PackageId>NonBlocking</PackageId>
+    <PackageId>NonBlocking.experimental</PackageId>
     <PackageVersion>2.1.0</PackageVersion>
     <Authors>Vladimir Sadov</Authors> 
     <Description>
@@ -41,8 +41,6 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
-    <IsTrimmable>true</IsTrimmable>
-    <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

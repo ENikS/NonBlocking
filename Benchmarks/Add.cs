@@ -31,6 +31,12 @@ namespace Benchmarks
             NonBlocking.Add(0, "0");
         }
 
+        [Benchmark]
+        public void Experimental_1()
+        {
+            Experimental.Add(0, "0");
+        }
+
 
         [Benchmark]
         public void Concurrent_2()
@@ -44,6 +50,13 @@ namespace Benchmarks
         {
             NonBlocking.Add(0, "0");
             NonBlocking.Add(1, "1");
+        }
+
+        [Benchmark]
+        public void Experimental_2()
+        {
+            Experimental.Add(0, "0");
+            Experimental.Add(1, "1");
         }
 
         [Benchmark]
@@ -62,6 +75,15 @@ namespace Benchmarks
             NonBlocking.Add(1, "1");
             NonBlocking.Add(2, "2");
             NonBlocking.Add(3, "3");
+        }
+
+        [Benchmark]
+        public void Experimental_4()
+        {
+            Experimental.Add(0, "0");
+            Experimental.Add(1, "1");
+            Experimental.Add(2, "2");
+            Experimental.Add(3, "3");
         }
 
         [Benchmark]
@@ -84,6 +106,17 @@ namespace Benchmarks
             NonBlocking.Add(3, "3");
             NonBlocking.Add(4, "4");
             NonBlocking.Add(5, "5");
+        }
+
+        [Benchmark]
+        public void Experimental_6()
+        {
+            Experimental.Add(0, "0");
+            Experimental.Add(1, "1");
+            Experimental.Add(2, "2");
+            Experimental.Add(3, "3");
+            Experimental.Add(4, "4");
+            Experimental.Add(5, "5");
         }
 
 
@@ -114,6 +147,19 @@ namespace Benchmarks
         }
 
         [Benchmark]
+        public void Experimental_8()
+        {
+            Experimental.Add(0, "0");
+            Experimental.Add(1, "1");
+            Experimental.Add(2, "2");
+            Experimental.Add(3, "3");
+            Experimental.Add(4, "4");
+            Experimental.Add(5, "5");
+            Experimental.Add(6, "6");
+            Experimental.Add(7, "7");
+        }
+
+        [Benchmark]
         public void Concurrent_10()
         {
             Concurrent.Add(0, "0");
@@ -141,6 +187,21 @@ namespace Benchmarks
             NonBlocking.Add(7, "7");
             NonBlocking.Add(8, "8");
             NonBlocking.Add(9, "9");
+        }
+
+        [Benchmark]
+        public void Experimental_10()
+        {
+            Experimental.Add(0, "0");
+            Experimental.Add(1, "1");
+            Experimental.Add(2, "2");
+            Experimental.Add(3, "3");
+            Experimental.Add(4, "4");
+            Experimental.Add(5, "5");
+            Experimental.Add(6, "6");
+            Experimental.Add(7, "7");
+            Experimental.Add(8, "8");
+            Experimental.Add(9, "9");
         }
 
         [Benchmark]
@@ -191,6 +252,31 @@ namespace Benchmarks
             NonBlocking.Add(17, "17");
             NonBlocking.Add(18, "18");
             NonBlocking.Add(19, "19");
+        }
+
+        [Benchmark]
+        public void Experimental_20()
+        {
+            Experimental.Add(0, "0");
+            Experimental.Add(1, "1");
+            Experimental.Add(2, "2");
+            Experimental.Add(3, "3");
+            Experimental.Add(4, "4");
+            Experimental.Add(5, "5");
+            Experimental.Add(6, "6");
+            Experimental.Add(7, "7");
+            Experimental.Add(8, "8");
+            Experimental.Add(9, "9");
+            Experimental.Add(10, "10");
+            Experimental.Add(11, "11");
+            Experimental.Add(12, "12");
+            Experimental.Add(13, "13");
+            Experimental.Add(14, "14");
+            Experimental.Add(15, "15");
+            Experimental.Add(16, "16");
+            Experimental.Add(17, "17");
+            Experimental.Add(18, "18");
+            Experimental.Add(19, "19");
         }
     }
 }

@@ -17,6 +17,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NonBlocking\NonBlockingExperimental.csproj" />
+    <ProjectReference Include="..\..\src\NonBlocking\NonBlocking.Experimental.csproj" />
   </ItemGroup>
 </Project>

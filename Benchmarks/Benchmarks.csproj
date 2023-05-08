@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="NonBlocking" Version="2.1.1" />
-    <ProjectReference Include="..\src\NonBlocking\NonBlockingExperimental.csproj" />
+    <ProjectReference Include="..\src\NonBlocking\NonBlocking.Experimental.csproj" />
   </ItemGroup>
 
 </Project>
