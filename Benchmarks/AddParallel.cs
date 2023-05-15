@@ -18,12 +18,12 @@ namespace Benchmarks
         [IterationSetup]
         public void Setup()
         {
-            NonBlocking = new NonBlocking.ConcurrentDictionary<int, int>();
-            Concurrent = new System.Collections.Concurrent.ConcurrentDictionary<int, int>();
+            Concurrent   = new System.Collections.Concurrent.ConcurrentDictionary<int, int>();
+            NonBlocking  = new NonBlocking.ConcurrentDictionary<int, int>();
             Experimental = new Experimental.ConcurrentDictionary<int, int>();
         }
 
-        [Params(10, 10_000, 100_000, 1_000_000)]
+        [Params(10, 100, 1_000, 10_000, 100_000, 1_000_000)]
         public int N;
 
         [Benchmark]

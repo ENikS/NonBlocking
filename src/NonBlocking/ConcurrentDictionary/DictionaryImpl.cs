@@ -71,11 +71,11 @@ namespace Experimental
         {
             var h = (uint)fullHash;
 
-            h ^= h >> 16;
-            h *= 0x7feb352dU;
-            h ^= h >> 15;
-            h *= 0x846ca68bU;
-            h ^= h >> 16;
+            //h ^= h >> 16;
+            //h *= 0x7feb352dU;
+            //h ^= h >> 15;
+            //h *= 0x846ca68bU;
+            //h ^= h >> 16;
 
             return (int)h & lenMask;
         }
