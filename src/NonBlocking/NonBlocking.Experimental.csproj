@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
 
-    <PackageId>NonBlocking</PackageId>
+    <PackageId>Experimental</PackageId>
     <PackageVersion>2.1.1</PackageVersion>
     <Authors>Vladimir Sadov</Authors> 
     <Description>
