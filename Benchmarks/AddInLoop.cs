@@ -19,7 +19,7 @@ namespace Benchmarks
             Experimental = new Experimental.ConcurrentDictionary<int, string>();
         }
 
-        [Params(1, 10, 100, 1_000, 10_000)]
+        [Params(1, 100, 1_000, 10_000, 100_000, 1_000_000)]
         public int N;
 
         [Benchmark]
